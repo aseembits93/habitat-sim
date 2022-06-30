@@ -54,6 +54,7 @@ struct BatchRendererTest : Cr::TestSuite::Tester {
   // TODO test CUDA readout (how to detect if CUDA is a thing?)
 };
 
+// clang-format off >:[
 const struct {
   const char* name;
   esp::gfx::BatchRendererFlags flags;
@@ -66,6 +67,7 @@ const struct {
     esp::gfx::BatchRendererFlag::NoTextures, 1.0f,
     "BatchRendererTestMeshHierarchyNoTextures.png"}
 };
+// clang-format on
 
 BatchRendererTest::BatchRendererTest() {
   addTests({&BatchRendererTest::generateTestData,
@@ -156,6 +158,7 @@ void BatchRendererTest::generateTestData() {
      layer is a cyan, magenta, yellow and black-ish square. Having each channel
      non-zero to make it possible to distinguish "rendering broken" from
      "texture coordinates broken". */
+  // clang-format off >:(
   Mn::Color3ub image[4*4*2] {
     0x990000_rgb, 0xcccccc_rgb, 0x990000_rgb, 0xcccccc_rgb,
     0xcccccc_rgb, 0x990000_rgb, 0xcccccc_rgb, 0x990000_rgb,
@@ -167,6 +170,7 @@ void BatchRendererTest::generateTestData() {
     0xcccc33_rgb, 0xcccc33_rgb, 0x333333_rgb, 0x333333_rgb,
     0xcccc33_rgb, 0xcccc33_rgb, 0x333333_rgb, 0x333333_rgb
   };
+  // clang-format on
   CORRADE_VERIFY(converter->add(
       Mn::ImageView3D{Mn::PixelFormat::RGB8Unorm, {4, 4, 2}, image}));
 
@@ -178,6 +182,7 @@ void BatchRendererTest::generateTestData() {
       Mn::SamplerWrapping::Repeat, 0}));
 
   /* A (default, white) material spanning the whole first texture layer */
+  // clang-format off >:[ YOU ARE NOT HELPING
   CORRADE_COMPARE(converter->add(Mn::Trade::MaterialData{{}, {
     {Mn::Trade::MaterialAttribute::BaseColorTexture, 0u},
     {Mn::Trade::MaterialAttribute::BaseColorTextureLayer, 0u}
@@ -286,6 +291,7 @@ void BatchRendererTest::generateTestData() {
       Cr::Containers::stridedArrayView(scene->meshes).slice(&Scene::Mesh::object),
       Cr::Containers::stridedArrayView(scene->meshes).slice(&Scene::Mesh::meshViewMaterial)},
   }}));
+  // clang-format on
 
   CORRADE_VERIFY(converter->endFile());
 
