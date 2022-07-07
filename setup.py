@@ -71,6 +71,16 @@ Use "HEADLESS=True pip install ." to build in headless mode with pip""",
         help="Build CUDA enabled features.  Requires CUDA to be installed",
     )
     parser.add_argument(
+        "--mujoco",
+        "--with-mujoco",
+        dest="with_mujoco",
+        default=str2bool(os.environ.get("WITH_MUJOCO", str(is_pip()))),
+        action="store_true",
+        help="""Build with Bullet simulation engine. Default to True when pip installing.
+ Default value is otherwise false or provided  WITH_MUJOCO=ON or WITH_MUJOCO_OFF when doing pip install.""",
+    )
+    parser.add_argument("--no-mujoco", dest="with_mujoco", action="store_false")
+    parser.add_argument(
         "--bullet",
         "--with-bullet",
         dest="with_bullet",
@@ -379,7 +389,6 @@ class CMakeBuild(build_ext):
 
         if not is_pip():
             self.create_compile_commands()
-
         subprocess.check_call(
             [osp.join(CMAKE_BIN_DIR, "cmake"), "--build", self.build_temp] + build_args
         )
