@@ -52,3 +52,6 @@
 [submodule "src/deps/rlr-audio-propagation"]
 	path = src/deps/rlr-audio-propagation
 	url = https://github.com/facebookresearch/rlr-audio-propagation
+[submodule "src/deps/mujoco"]
+	path = src/deps/mujoco
+	url = https://github.com/deepmind/mujoco
