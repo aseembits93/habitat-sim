@@ -2,7 +2,7 @@ find_package(MagnumIntegration REQUIRED Bullet)
 find_package(Bullet REQUIRED Dynamics)
 
 add_library(
-  bulletphysics STATIC
+  mujocophysics STATIC
   BulletArticulatedObject.cpp
   BulletArticulatedObject.h
   BulletBase.cpp
@@ -22,7 +22,7 @@ add_library(
 )
 
 target_link_libraries(
-  bulletphysics
+  mujocophysics
   PUBLIC assets MagnumIntegration::Bullet Bullet::Dynamics
 )
 
